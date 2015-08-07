@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Create a Responsive Website -- Learn.knightlab.com</title>
+
+	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js">
+	</script>
+	<link rel="import" href="elements/elements.html">
+</head>
+
+<body class="fullbleed">
+	<learn-nav></learn-nav>
+	<lesson-banner image="/images/learn/basic-website-banner.png" title="Create a Basic Website"></lesson-banner>
+
+	<div>
+
+		<narrative-text>
+			<p>
+				So you’ve built a website, and it looks fine on your computer. That’s great! But how do you know it’ll look the same on other people’s computers? And what about phones? We haven’t even talked about how your website might look on mobile devices even though
+				people spend more time online on mobile than any other platform. In short, the problem is that you don’t know how your website will respond when pulled up on screens of different sizes. Here, we’ll cover some different resources and general ideas
+				on how to tackle that issue.
+			</p>
+		</narrative-text>
+
+		<lesson-block>
+			<h2>
+				You'll need to get started
+			</h2>
+			<div class="horizontal layout">
+				<capsule-unit ref='text-editor'>
+					<link-ref image="images/learn/text-editor.png" title="Sublime Text" link="http://www.sublimetext.com/"></link-ref>
+					<link-ref image="images/learn/text-editor.png" title="Notepad++" link="https://notepad-plus-plus.org/"></link-ref>
+					<link-ref image="images/learn/text-editor.png" title="Atom" link="https://atom.io/"></link-ref>
+					<link-ref image="images/learn/text-editor.png" title="TextMate" link="https://macromates.com/"></link-ref>
+				</capsule-unit>
+				<capsule-unit ref='modern-web-browser'>
+				</capsule-unit>
+			</div>
+		</lesson-block>
+
+		<step-block title="pls respond">
+			<p>
+				Different websites handle responsiveness in different ways, some better than others. You’ve probably seen websites that direct you to a completely different site if you’re visiting on a phone, or even some that outright prevent you from accessing a website
+				if they see you’re on a mobile device. While the first option is bad because it means you have to write two separate websites (which means twice the editing any time you want to change something!), it’s easy to understand why the second option is
+				worse: people who want to access your site on mobile won’t get anything at all.
+			</p>
+			<p>
+				The better option is to create a responsive website – a single website that changes its layout and content automatically depending on the screen size and resolution – so everything stays centralized and neat.
+			</p>
+		</step-block>
+
+		<step-block title="The Gridiron">
+			<p>
+				Responsive design is an issue that has been pondered by many a mind, and as a result there is no shortage of possible solutions readily available. Many are HTML, CSS and/or Javascript frameworks that revolve around a common grid system or allow you to
+				easily define your own.
+			</p>
+			<info-block>
+				<h2>What the heck is a framework!!!!</h2>
+				<p>
+					If you’re planning on getting deeper into the world of code (trust me, it gets a lot deeper), you’re going to be seeing the words “framework” and “library” a lot, sometimes used interchangeably. It can be easy to get confused on what exactly these are,
+					so here’s a quick (and by no means final) explanation:
+				</p>
+				<p>
+					A library as a concept is a bit older than a framework, and it’s basically just code that someone else has written that makes some part of your job easier. That code can be anything, from CSS stylings to HTML layouts to Javascript functions. All you do
+					is hook it up to code you already have, and presto! It’s yours. You typically won’t have to modify code found in a library.
+				</p>
+				<p>
+					A framework is similar to a library in that it provides pre-written code that fulfills some functionality, but differs in that it’s typically more of an outline that you have to flesh out. A framework can be a library, but is distinguished in how it’s
+					used: frameworks still require you to do the heavy lifting (you still have to decide how to use it, which features to implement, etc), while a library helps you once you’ve made those decisions.
+				</p>
+				<p>
+					To be honest, there is no hard and fast definition for libraries or frameworks, or even for what the difference is between the two. In general however, libraries are typically smaller and simpler, while frameworks are larger but more robust.
+				</p>
+			</info-block>
+			<p>
+				If you’ve ever designed for a magazine or newspaper, you’re probably familiar with grid systems. Grids allow you to easily organize content and layout using columns and make it easy to plan out and change designs. A layout can be split into any number
+				of total columns, but the most common number is 12, a nice multiple of both three and four.
+			</p>
+			<p>
+				Typically, the columns are placed on the inside of the page or screen so that there is space around the columns on all sides. This spacing is referred to as the margin, and is just there to make sure your content doesn’t seem cramped. There’s spacing
+				in between columns as well: those spaces are called the gutters and are also there to promote legibility.
+			</p>
+			<p>
+				Content can be made to span across any number of columns: a big splash image might take up all 12 columns across (or may even ignore margins and take up the entire width of the screen), while you might only want your body copy to span six columns.
+			</p>
+
+
+			<media-group class="layout horizontal around-justified">
+				<zooming-image src="http://media.creativebloq.futurecdn.net/sites/creativebloq.com/files/images/2010/09/grids_fig3-1-.jpg" full-src="http://media.creativebloq.futurecdn.net/sites/creativebloq.com/files/images/2010/09/grids_fig3-1-.jpg"></zooming-image>
+			</media-group>
+		</step-block>
+
+		<step-block title="Bootcamp">
+			<p>
+				Perhaps the most popular responsive design framework is Bootstrap, a mobile-first approach to building websites that uses the 12-column grid system we just mentioned and comes preloaded with its own HTML, CSS, and Javascript. We’ll be using Bootstrap
+				in this lesson to introduce you to responsive web development.
+			</p>
+			<p>
+				There are a few ways of hooking up Bootstrap to your website, but the easiest way is to simply link it like any other stylesheet through their CDN:
+			</p>
+			<code-block>
+&lt;!-- Bootstrap core CSS --&gt;
+&lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"&gt;
+&lt;!-- Optional Bootstrap theme --&gt;
+&lt;link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"&gt;
+&lt;!-- JavaScript --&gt;
+&lt;script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">&lt;/script&gt;
+			</code-block>
+
+			<info-block>
+				<h2></h2>
+				<p>
+					One thing to watch out for in front-end web development is the ordering of your stylesheets. You’ll most likely want to link Bootstrap’s optional theme along with the core CSS because it’s relatively nice-looking and just means less work for you. However,
+					if you want to make your own changes to elements after installing the theme, you might run into some trouble for two reasons.
+				</p>
+				<p>
+					For one, CSS is very particular about priority level for styles, and rightfully so. In CSS, because there are so many different ways of selecting elements, it’s possible to style the same element via multiple selectors, and so a strict priority system
+					is necessary to ensure that elements can be styled in a predictable and manageable way. For selectors, the order goes element, class, ID from lowest to highest priority (element names get a priority of one, classes ten, and IDs 100), and more specific
+					selectors get priority over less specific ones.
+				</p>
+				<p>
+					For example, if you’re modifying an element such as:
+				</p>
+				<code-block>
+&lt;p class=’example-class’ id=’example-id’>example&lt;/p&gt;
+				</code-block>
+				<p>
+					with the following CSS in an external stylesheet:
+				</p>
+				<code-block>
+p {
+	color: red;
+}
+
+.example-class {
+	color: blue;
+}
+
+#example-id {
+	color: green;
+}
+				</code-block>
+				<p>
+					the paragraph text will always appear green. Taking away the #example-id rule will turn the paragraph blue, and finally removing the .example-class rule will turn the paragraph red.
+				</p>
+				<p>
+					Secondly, because CSS is cascading, it also styles elements based on the last rule read about that element. This means that not only do later rules on the same stylesheet override earlier ones (as long as it has an equal or higher priority level), but
+					also rules that are introduced in later stylesheets override those found in earlier stylesheets.
+				</p>
+				<p>
+					What does this mean for you? If you’re trying to style something that’s been pre-styled with Bootstrap’s theme and it’s not appearing the way you expect it to, make sure that your custom stylesheet is placed lower in the HTML head section than the Bootstrap
+					theme. Also, try to be as specific as possible, using IDs where necessary.
+				</p>
+			</info-block>
+			<p>
+				Keep in mind that you’ll also need jQuery, a Javascript library, for all of Bootstrap’s Javascript plugins. You can add that here, and make sure to hook up the jQuery before hooking up the Bootstrap Javascript plugin:
+			</p>
+			<code-block>
+&lt;!-- jQuery --&gt;
+&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"&gt;&lt;/script&gt;
+			</code-block>
+			<p>
+				Another thing to keep in mind that may not be obvious at first is that these links all point to servers. That means that your website won’t work without an internet connection. This won’t be a problem if your site itself is hosted on a server, as retrieving
+				the site in the first place requires an internet connection. However, this does mean that your website won’t open correctly on your computer while you’re editing the files if you’re not connected to the internet.
+			</p>
+		</step-block>
+
+		<step-block title="Row, row, row your boat">
+			<p>To utilize the Bootstrap components, you’ll be adding classes to your elements to describe how they should function. To start off, you’ll need a Bootstrap container, so put that in your body:
+			</p>
+
+			<code-block>
+&lt;div class='container'&gt; &lt;/div&gt;
+			</code-block>
+
+			<p>
+				Now within that container we can start to build out the innards of the website. Inside the container div, make another div with a row class.
+			</p>
+
+			<code-block>
+&lt;div class=’row’&gt; &lt;/div&gt;
+			</code-block>
+
+			<p>
+				As you might expect, this div will now function as a row into which we can start putting our other components. The row serves as a container for the 12 columns that we’re going to be making use of soon. But first, let’s get a visualization of how the
+				grid system actually works.
+			</p>
+
+			<p>
+				Each column should be wrapped in its own div and will belong to a class that describes how wide it will appear and at what sizes. Let’s see how this works. Inside your row div, insert a column div:
+			</p>
+
+			<code-block>
+&lt;div class=’col-md-1’&gt; &lt;/div&gt;
+			</code-block>
+
+			<p>
+				Inside your custom CSS file, go ahead and add a rule to make the background-color of all one-width columns red. We’ll also give the column a height of 50px.
+			</p>
+
+			<code-block>
+.col-md-1 {
+	background-color: red;
+	height: 50px;
+}
+			</code-block>
+			<p>
+				Save, then open your HTML in your browser, and you see a small red rectangle at the top of your screen. The width of that rectangle represents how much space one column gets. Of course, there’s space between columns (although this comes in the form of
+				padding, which is on the inside of the div, rather than margin, which is on the outside), so a two-width column of text will be more than twice as wide as its one-width counterpart, but not by much. In your HTML document, copy and paste the col-md-1
+				div 11 more times in the same row and refresh your screen. Try typing some placeholder text inside the div. You can even try playing around with the numbers: see what happens if you change one of the columns to col-md-3 or col-md-4 (be sure to change
+				the colors so you can tell which width is which). It may seem pretty obvious at this point, but the number at the end of the class just determines how many columns that div will span, up to 12. What may be a little less obvious is what the “md” stands
+				for.
+			</p>
+
+			<p>
+				Bootstrap has four main classifications for devices: extra-small (phones with a screen width of less than 768px), small (tablets with a width of 768px or more), medium (desktops with a width of 992px or more), and large (big desktops with a width of 1200px
+				or more). Because you might want the layout of your website to appear differently on different screens, you can change how wide a div will be for a given screen size by merely appending column classes. The following div:
+			</p>
+
+			<code-block>
+&lt;div class=’col-xs-6 col-md-3’&gt; &lt;/div&gt;
+			</code-block>
+
+			<p>
+				will span six columns on an extra-small screen and three columns on a medium-sized screen. Keep in mind that these classification systems are based on device width, and orientation may still play a role as to how your website looks and handles.
+			</p>
+
+		</step-block>
+
+		<step-block title="Let's get building">
+			<p>
+				Let’s get a fresh start: go ahead and delete everything we did in the previous steps except for the container and row divs in your HTML file. We’ll be making a super hip and modern portfolio site, so we should start off with a big splash image. You can
+				use any relatively large landscape-oriented image you want (if you can’t find one you’d want to use right now, check out https://unsplash.com for options).
+			</p>
+			<p>
+				We want this image to be pretty big. In fact, we want this to be a full-screen image so that when people visit our website, they’ll think, “Wow, look at this great photography. It takes a lot of artistic vision to pick out a high-quality, well-composed
+				landscape photo from a website. I like this guy or gal or human being with no attachment to gendered pronouns.” To do that, we’re going to add a descriptive class to our container and then give our container the background-image of whatever photo
+				we chose:
+			</p>
+
+			<code-block>
+&lt;!-- HTML --&gt;
+&lt;div class='container splash-container'&gt; &lt;/div&gt;
+			</code-block>
+
+			<code-block>
+/* CSS */
+.splash-container {
+	height: 100vh; // sets container height to 100% of view height
+	width: 100vw; // sets container width to 100% of view width
+	background-image: url('https://unsplash.com/photos/duoMdMm3aY0/download'); // sets background-image to image at specified URL
+	background-size: cover; // makes sure that the background-image will always fully cover the splash-container
+	background-position: bottom; // aligns the background-image to the bottom of the splash-container
+}
+			</code-block>
+
+			<p>
+				Now let’s get some text on the screen. Create a new row inside your container, and inside the row add a 12-width column and give it an additional class of header. Then add a greeting in your language of choice. Mine’s English.
+			</p>
+
+			<code-block>
+&lt;div class=’row’&gt;
+	&lt;div class=’col-md-12 header’&gt;
+		Hello.
+	&lt;/div&gt;
+&lt;/div&gt;
+			</code-block>
+
+			<p>
+				Okay, now let’s style it to get it looking a bit better. In your CSS document, add rules to the header to get the greeting to be aligned center, then shift it down about 40% of the view height from the top. We should also change the color so it’s a bit more visible against the background. Oh! And let’s also make the text bigger, and bump up the font-weight a little. You know how to do all that, don’t you?
+			</p>
+
+			<code-block>
+.header {
+    text-align: center;
+    margin-top: 40vh;
+    color: white; // white may not be the best color for you, depending on what your background’s like
+    font-weight: 700; // 700 is usually a “bold” font-weight; 400 is usually the “regular” weight
+    font-size: 9em;
+}
+			</code-block>
+
+			<media-group class="layout horizontal around-justified">
+					responsive-01 goes here
+			</media-group>
+
+			<p>
+				Dang, look at that! It’s so simple and understated! It’s so clean! It’s so minimal (feel free to jump in with any other design jargon terms you know)! So Bauhaus! So Swiss!
+			</p>
+		</step-block>
+
+		<step-block title="Game, offset, match">
+			<p>
+				Okay, hotshot, we’re not quite done yet (well if all you’re looking for is a website that says “hello” against a mountain landscape, then I guess at this point you are done). Let’s go ahead and add a little description paragraph so visitors know who built this thing.
+			</p>
+
+			<p>
+				We’ll want to contain our description in a new row, so we’ll do just that. The description itself might be a little long depending on the length of your name and how important you think you are, so we should think about how wide we want it to be. We probably want it to go across half the width of the screen at most for laptops and medium-sized computers. For really big computers, half the width of the screen is probably too big though--at that point we might want to limit it to a third of the screen. Although for phones, the full screen-width is probably okay.
+			</p>
+
+			<p>
+				See how useful it is to be able to delineate between screen sizes? If we clearly plan out how we want our website to look on each platform we can carefully account for each use case and ensure that everyone gets an equally beautiful website on their devices.
+			</p>
+
+			<p>
+				So let’s do just that. Are you ready? This is going to be a doozy.
+			</p>
+
+			<code-block>
+&lt;div class='row'&gt;
+	&lt;div class='col-sm-12 col-md-6 col-lg-4 description'&gt;
+		My name is Inigo Montoya and welcome to my website!!! You killed my father!!! Prepare to die!!!
+	&lt;/div&gt;
+&lt;/div&gt;
+			</code-block>
+
+			<p>
+				I’ll go ahead and note right now that the col-sm-12 is redundant: one nice Bootstrap feature is that once the screen is resized to be smaller than the smallest column size explicitly accounted for in a div, that div will automatically become a 12-width column. For example, if we had a &lt;div class='col-md-1'&gt; &lt;/div&gt;, that column would turn into a 12-width column once the screen classified as a small or extra-small. But while it is redundant to use col-sm-12, sometimes it’s nice to be explicit about what we’re doing so that people who have to look at our code after us (including our future selves) don’t get confused.
+			</p>
+
+			<p>
+				Alright, now let’s style this puppy or kitty or animal with no attachment to speciesed nouns. I think it’ll look cool with the same color text as we used in the header, a font-size of 2em, and centered text. Let’s check it out:
+			</p>
+
+			<code-block>
+.description {
+    color: white;
+    font-size: 2em;
+    text-align: center;
+}
+			</code-block>
+
+			<media-group class="layout horizontal around-justified">
+					responsive-02 goes here
+			</media-group>
+
+			<p>
+				Hm. The text is centered, so that’s right, but it’s not centered in the right place. That’s because (on my screen at least) the description container spans six out of 12 columns, and not the full 12 like the header did, so the text will only be aligned within those six columns. We’ll need to shift the description column over somehow.
+			</p>
+
+			<p>
+				Bootstrap has a class for offsetting columns, and it works much in the same way as their column-sizing classes. Since our description spans six of the 12 columns in medium views, we’ll need to offset it by three in medium views to get it centered. In large views, since it’s four columns wide at that point, we’ll have to offset it by four. Double-check the math on that for me real quick (we don’t need to set an offset for the small size because, like how larger column sizing classes don’t apply to smaller screens, larger column-offsets don’t apply in smaller screens).
+			</p>
+
+			<code-block>
+&lt;div class='row'&gt;
+	&lt;div class='col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4 description'&gt;
+    	My name is Inigo Montoya and welcome to my website!!! You killed my father!!! Prepare to die!!!
+	&lt;/div&gt;
+&lt;/div&gt;
+			</code-block>
+
+			<media-group class="layout horizontal around-justified">
+					responsive-03 goes here
+			</media-group>
+		</step-block>
+
+		<step-block title="You can't escape his gaze">
+			<p>
+				Perfect! But unless you’re very boring or a newborn you probably can’t describe your entire existence in two or three lines. We’ll go ahead and start a new section so you can digress to your heart’s content. Make a new container directly under your splash-image and populate it with a row. Inside that row, we’ll include two columns: one for an about section and another for a headshot.
+			</p>
+
+			<code-block>
+&lt;div class='container'&gt;
+  &lt;div class='row'&gt;
+      &lt;div class='col-md-3'&gt;
+
+      &lt;/div&gt;
+      &lt;div class='col-md-9'&gt;
+
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+			</code-block>
+
+			<p>
+				In our smaller three-width column, let’s put our about section. Add an h1 tag and a p tag, and flesh out a more detailed description about yourself. You know, what you like and what you stand for. That stuff.
+			</p>
+
+			<code-block>
+&lt;div class='col-md-3'&gt;
+	&lt;h1&gt; About Me&lt;/h1&gt;
+    &lt;p&gt;I like long walks on the beach, starring in Quentin Tarantino films, and being America's sweetheart. If you're looking for a fun guy with a great sense of humor and a huge heart, I'd love to get coffee with you sometime and talk. You can find my contact info on my FarmersOnly profile page.&lt;/p&gt;
+&lt;/div&gt;
+			</code-block>
+
+			<p>
+				On your nine-width column, add an img tag with your headshot.
+			</p>
+
+			<code-block>
+&lt;div class='col-md-9'&gt;
+		&lt;img src="http://amahighlights.com/wp-content/uploads/steve-buscemi.jpg"&gt;
+&lt;/div&gt;
+			</code-block>
+
+			<p>
+				The img tag on its own doesn’t look quite right, so we’ll add a class to it and modify it in our CSS file.
+			</p>
+
+			<code-block>
+&lt;!--HTML--&gt;
+&lt;div class='col-md-9'&gt;
+		&lt;img class='headshot' src="http://amahighlights.com/wp-content/uploads/steve-buscemi.jpg"&gt;
+&lt;/div&gt;
+			</code-block>
+
+			<code-block>
+/* CSS */
+.headshot {
+    width: 100%; // ensures that the image is as wide as the containing div
+    padding-top: 20px;
+}
+			</code-block>
+
+			<media-group class="layout horizontal around-justified">
+				responsive-04 goes here
+			</media-group>
+
+			<p>
+				Sweeeeet. But now’s the time for the moment of truth: how does it look when we resize our screen?
+			</p>
+
+			<media-group class="layout horizontal around-justified">
+				responsive-05 goes here
+			</media-group>
+
+			<p>
+				Hey, check that out! The widths of our columns changed as the screen shrunk, and our image automatically went under the about section once there wasn’t any room for it on the side. That’s not half bad. In fact, I’d be willing to say it’s at least half good. Maybe even three-quarters good.
+			</p>
+
+			<p>
+				But we’re certainly not done. If not using Google Chrome to view your website, go ahead and download it. Once you have it, open your website in Google Chrome and right-click anywhere on the screen to select “Inspect Element.” Then, at the top left of the panel that showed up on the right of your screen, select the little phone icon (it should say “Toggle device mode” if you hover over it).
+			</p>
+
+			<media-group class="layout horizontal around-justified">
+				responsive-06 goes here
+			</media-group>
+
+			<p>
+				This is one of Google Chrome’s most powerful web debugging tools. You can use it to emulate different devices on your computer, each having different screen sizes and resolutions. On the top-left of your browser window, you should now see a drop-down menu with the word “Devices” next to it. From that drop-down menu you can select from a variety of pre-set devices. Just for kicks, let’s pick the iPhone 6 option. What happens?
+			</p>
+
+			<p>
+				All of a sudden, our text is super tiny. We set it to 9em--why is it so small all of a sudden when it was so big on our computer? And not only is that text tiny, but so is everything else.
+			</p>
+
+			<p>
+				This happens because screens and devices come not only in different sizes, but also in different resolutions and pixel ratios as well. A screen’s resolution is essentially the number of pixels it can display (usually something like 1280x720 or 1920x780).
+			</p>
+
+			<p>
+				The pixel ratio is the relationship between physical pixels (the actual screen size) and logical pixels (how the screen size is interpreted by CSS). A iPhone 5s, for example, has a screen resolution of 640x1136 pixels. Its CSS pixel ratio, however, is 2, so when loading websites the browser determines its resolution to be 320x568 (half its real screen resolution in both measurements).
+			</p>
+
+			<p>
+				Pixel ratios were invented because without them websites would appear so small as to be unviewable. As mobile screens become more and more pixel-dense, a measurement of 200px becomes much smaller on a phone than it is on a computer.
+			</p>
+		</step-block>
+
+		<step-block title="Media queries">
+			<p>
+				To help alleviate this issue, CSS3 implemented a new feature known as media queries. These are rules within your CSS that are only triggered when certain conditions about the browser are met: what kind of device it’s being displayed on, how wide the window is, what the pixel ratio is, and things like that. Media queries allow you to be even more specific in how you target screens, and follow a rather simple format:
+			</p>
+
+			<code-block>
+@media screen and (max-width: 800px) {
+	/* rules go here */
+}
+			</code-block>
+
+			<p>
+				This is where Bootstrap’s “mobile-first” mantra comes in: you first design your website for mobile devices, and then you add media queries and other layout-affecting attributes to make sure your website still appears correctly on larger devices. With that in mind, let’s make a few changes to our website so it follows this convention. Don’t worry, we won’t be changing too much.
+			</p>
+
+			<p>
+				The first thing we should do is make the header a bit larger on our phones. If you look on the device preview, our header should look pretty small. In your CSS file, bump up the font-size to 15em.
+			</p>
+
+			<code-block>
+.header {
+	font-size: 15em;
+}
+			</code-block>
+
+			<p>
+				We should do the same to our description. We’ll make it twice as big as it was before.
+			</p>
+
+			<code-block>
+.description {
+	font-size: 4em;
+}
+			</code-block>
+
+			<media-group class="layout horizontal around-justified">
+				responsive-07 goes here
+			</media-group>
+
+			<p>
+				Now it looks better on our phone view, but how to does it check out on the desktop?
+			</p>
+
+			<media-group class="layout horizontal around-justified">
+				responsive-08 goes here
+			</media-group>
+
+			<p>
+				Yikes. Everything’s way too big. Don’t worry, This is where media queries come in.
+			</p>
+
+			<p>
+				Add a media query to target devices with a minimum width of 768px, and in that query apply rules to make our header and description font sizes what they were before we changed them.
+			</p>
+
+			<code-block>
+@media screen and (min-width: 981px) {
+  .header {
+    font-size: 9em;
+  }
+
+  .description {
+    font-size: 2em;
+  }
+}
+			</code-block>
+
+			<p>
+				There! Now if you switch your device setting to “Laptop with MDPI screen” or “Laptop with HDPI screen,” everything should still check out!
+			</p>
+
+			<p>
+				Now, a disclaimer: the media query we just put in won’t account for every screen size--you’ll notice that if you manually resize your browser with the website open it’ll break at one point, and the text will become much larger than you wanted it to. Making a website responsive and fit screens of every size does take some time and fiddling with media queries to get the right look at every size, and the breakpoints are different for every website. The best way to get familiar with your website’s natural breakpoints is just to play around with it and see what sizes are best for you.
+			</p>
+
+			<p>
+				Now that you understand the basics of responsive web design through Bootstrap, you can start adding sections to your website and begin to make it truly yours. If you’d like, you can also explore other responsive design frameworks, like Foundation or Google’s Material Design Lite (Google’s MDL is closer to a styling library than a full responsive design framework, and while it does have a similar grid-based system to Bootstrap or Foundation, it isn’t its main feature. MDL is also heavily styled to Google’s Material Design guidelines, and so if you’re not sure about committing to that look you may want to look elsewhere). There’s also much more to Bootstrap than just their responsive layouts--Bootstrap comes with a bunch of pre-built components (like a navbar). You can check out what they do and how to use them here.
+			</p>
+
+			<info-block>
+				<p>
+					It’s important to have the right tools to test responsive websites with, as sometimes websites on actual mobile devices will look different even from the same website on a resized desktop browser. To help you debug and test your responsive websites, Google Chrome has a great device mode feature that allows you to emulate many common screen sizes and devices. To use it, simply open your website in Google Chrome, then right click anywhere on the screen and select “Inspect Element.” This will pull up your HTML side-by-side with the actual website (inspect element is a great way to see how the browser is actually interpreting your code), and in the top left corner there should be a small phone icon. Click it to toggle device mode, and once it’s on you’ll be able to select devices of varying sizes, including phones, tablets, and even some desktops.
+				</p>
+			</info-block>
+		</step-block>
+
+		<step-block title='Full Code'>
+			<info-block>
+				<h2>HTML</h2>
+				<code-block>
+code goes here
+				</code-block>
+			</info-block>
+			<info-block>
+				<h2>CSS</h2>
+				<code-block>
+code goes here
+				</code-block>
+			</info-block>
+		</step-block>
+	</div>
+</body>
+
+</html>
